@@ -20,11 +20,22 @@ namespace MarsRover
         [Fact]
         public void GetForwardFromInitialPositionAndDirection()
         {
-            Rover rover = new Rover(new Point(0,0), Direction.North);
+            var rover = new Rover(new Point(0,0), Direction.North);
 
             rover.Move(Move.Forward);
             
             Assert.Equal(new Point(0, 1), rover.Point);   
+            Assert.Equal(Direction.North, rover.Direction);
+        }
+        
+        [Fact]
+        public void GetForwardFromInitialPositionAndDirectionv2()
+        {
+            var rover = new Rover(new Point(1,0), Direction.North);
+
+            rover.Move(Move.Forward);
+            
+            Assert.Equal(new Point(1, 1), rover.Point);   
             Assert.Equal(Direction.North, rover.Direction);
         }
         
@@ -53,21 +64,21 @@ namespace MarsRover
 
         public void Move(Move move)
         {
-            Point = new Point(0,1);
+            Point = new Point(Point.X,Point.Y + 1);
         }
     }
 
     public struct Point
     {
-        private readonly int _x;
-        private readonly int _y;
+        public int X { get; }
+        public int Y { get; }
 
         public Point(int x, int y)
         {
-            _x = x;
-            _y = y;
+            X = x;
+            Y = y;
         }
 
-        public override string ToString() => $"x:{_x} y:{_y}";
+        public override string ToString() => $"x:{X} y:{Y}";
     }
 }
