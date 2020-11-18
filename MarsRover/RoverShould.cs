@@ -5,17 +5,16 @@ namespace MarsRover
 {
     public class RoverShould
     {
-
         [Theory]
         [InlineData(1,1, Direction.South)]
         [InlineData(1,3, Direction.North)]
         [InlineData(1,4, Direction.East)]
         [InlineData(2,3, Direction.West)]
-        public void getCurrentPointFromStartingPoint(int x, int y, Direction direction)
+        public void GetCurrentPointFromStartingPoint(int x, int y, Direction direction)
         {
             var rover = new Rover(new Point(x,y), direction);
-            Assert.Equal(rover.Point, new Point(x,y));
-            Assert.Equal(rover.Direction, direction);
+            Assert.Equal(new Point(x,y), rover.Point);
+            Assert.Equal(direction, rover.Direction);
         }
 
         [Fact]
@@ -25,8 +24,8 @@ namespace MarsRover
 
             rover.Move(Move.Forward);
             
-            Assert.Equal(rover.Point, new Point(0, 1));   
-            Assert.Equal(rover.Direction, Direction.North);
+            Assert.Equal(new Point(0, 1), rover.Point);   
+            Assert.Equal(Direction.North, rover.Direction);
         }
         
     }
