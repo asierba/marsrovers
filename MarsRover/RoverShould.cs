@@ -5,23 +5,29 @@ namespace MarsRover
 {
     public class RoverShould
     {
-        [Fact]
-        public void getCurrentPointFromInitialPoint()
+
+        [Theory]
+        [InlineData(1,1)]
+        [InlineData(1,3)]
+        public void getCurrentPointFromStartingPoint(int x, int y)
         {
-            var rover = new Rover(new Point(1,1));
-            Assert.Equal(rover.getCurrentPoint(), new Point(1,1));
+            var rover = new Rover(new Point(x,y));
+            Assert.Equal(rover.getCurrentPoint(), new Point(x,y));
         }
     }
 
     public class Rover
     {
+        private readonly Point _point;
+
         public Rover(Point point)
         {
+            _point = point;
         }
 
         public Point getCurrentPoint()
         {
-            return new Point(1,1);
+            return _point;
         }
     }
 
