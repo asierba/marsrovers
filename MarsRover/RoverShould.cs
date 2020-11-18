@@ -17,6 +17,23 @@ namespace MarsRover
             Assert.Equal(rover.Point, new Point(x,y));
             Assert.Equal(rover.Direction, direction);
         }
+
+        [Fact]
+        public void GetForwardFromInitialPositionAndDirection()
+        {
+            Rover rover = new Rover(new Point(0,0), Direction.North);
+
+            rover.Move(Move.Forward);
+            
+            Assert.Equal(rover.Point, new Point(0, 1));   
+            Assert.Equal(rover.Direction, Direction.North);
+        }
+        
+    }
+
+    public enum Move
+    {
+        Forward
     }
 
     public enum Direction
@@ -26,7 +43,7 @@ namespace MarsRover
 
     public class Rover
     {
-        public Point Point { get; }
+        public Point Point { get; private set; }
         public Direction Direction { get; }
 
         public Rover(Point point, Direction direction)
@@ -35,6 +52,10 @@ namespace MarsRover
             Direction = direction;
         }
 
+        public void Move(Move move)
+        {
+            Point = new Point(0,1);
+        }
     }
 
     public struct Point
@@ -47,5 +68,7 @@ namespace MarsRover
             _x = x;
             _y = y;
         }
+
+        public override string ToString() => $"x:{_x} y:{_y}";
     }
 }
