@@ -7,28 +7,34 @@ namespace MarsRover
     {
 
         [Theory]
-        [InlineData(1,1)]
-        [InlineData(1,3)]
-        public void getCurrentPointFromStartingPoint(int x, int y)
+        [InlineData(1,1, Direction.South)]
+        [InlineData(1,3, Direction.North)]
+        [InlineData(1,4, Direction.East)]
+        [InlineData(2,3, Direction.West)]
+        public void getCurrentPointFromStartingPoint(int x, int y, Direction direction)
         {
-            var rover = new Rover(new Point(x,y));
-            Assert.Equal(rover.getCurrentPoint(), new Point(x,y));
+            var rover = new Rover(new Point(x,y), direction);
+            Assert.Equal(rover.Point, new Point(x,y));
+            Assert.Equal(rover.Direction, direction);
         }
+    }
+
+    public enum Direction
+    {
+        North, South, East, West
     }
 
     public class Rover
     {
-        private readonly Point _point;
+        public Point Point { get; }
+        public Direction Direction { get; }
 
-        public Rover(Point point)
+        public Rover(Point point, Direction direction)
         {
-            _point = point;
+            Point = point;
+            Direction = direction;
         }
 
-        public Point getCurrentPoint()
-        {
-            return _point;
-        }
     }
 
     public struct Point
